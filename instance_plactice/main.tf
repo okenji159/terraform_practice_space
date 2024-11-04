@@ -34,11 +34,7 @@ resource "aws_instance" "test" {
     vpc_security_group_ids = [aws_security_group.for_ec2.id]
 
     #apacheのインストール
-    user_data = <<EOF
-        #!/bin/bash
-        yum install -y httpd
-        systemctl start httpd.service
-    EOF
+    user_data = file("./apache_install.sh")
 
     tags = {
         Name = "example"
